@@ -199,18 +199,18 @@
         .question-card {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            padding: 25px;
+            padding: 15px;
             border-radius: 20px;
-            margin: 20px 0;
+            margin: 10px 0;
             text-align: center;
-            font-size: 1.3em;
+            font-size: 1.1em;
         }
 
         .interactive-question {
             background: rgba(255,255,255,0.95);
             border-radius: 15px;
-            padding: 25px;
-            margin: 20px 0;
+            padding: 15px;
+            margin: 10px 0;
             box-shadow: 0 8px 32px rgba(0,0,0,0.1);
         }
 
@@ -369,8 +369,8 @@
         .progress-bar {
             background: rgba(255,255,255,0.3);
             border-radius: 10px;
-            height: 12px;
-            margin: 20px 0;
+            height: 8px;
+            margin: 10px 0;
             overflow: hidden;
         }
 
@@ -542,8 +542,8 @@
             background: #fffef0;
             border: 2px dashed #ffd93d;
             border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
+            padding: 15px;
+            margin: 10px 0;
             position: relative;
         }
 
@@ -3811,30 +3811,30 @@
             const totalStages = Math.ceil(appState.totalQuestions / 15);
             
             let html = `
-                <div class="exercise-header" style="text-align: center; margin-bottom: 20px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                        <button class="btn btn-secondary" onclick="confirmExitExercise()" style="font-size: 0.9em; padding: 8px 16px;">
-                            🏠 Volver al inicio
+                <div class="exercise-header" style="text-align: center; margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <button class="btn btn-secondary" onclick="confirmExitExercise()" style="font-size: 0.8em; padding: 6px 12px;">
+                            🏠 Inicio
                         </button>
                         <div style="text-align: center;">
-                            <h2 style="margin: 0;">Sub-etapa ${subStage.current} de ${totalStages}</h2>
-                            <p style="margin: 5px 0; font-size: 0.9em; color: #667eea;">
+                            <h3 style="margin: 0; font-size: 1.2em;">Sub-etapa ${subStage.current} de ${totalStages}</h3>
+                            <p style="margin: 2px 0; font-size: 0.8em; color: #667eea;">
                                 Pregunta ${currentQuestionInStage} de 15
                             </p>
                         </div>
-                        <div style="width: 150px;"></div>
+                        <div style="width: 100px;"></div>
                     </div>
                     <div class="sub-stage-indicator" style="display: flex; gap: 5px; justify-content: center; margin-bottom: 10px;">
                         ${Array.from({length: totalStages}, (_, i) => `
                             <div style="
-                                width: 30px; 
-                                height: 30px; 
+                                width: 25px; 
+                                height: 25px; 
                                 border-radius: 50%; 
                                 display: flex; 
                                 align-items: center; 
                                 justify-content: center;
                                 font-weight: bold;
-                                font-size: 0.9em;
+                                font-size: 0.8em;
                                 background: ${i < subStage.completed ? 'linear-gradient(45deg, #2ecc71, #27ae60)' : 
                                             i === subStage.current - 1 ? 'linear-gradient(45deg, #667eea, #764ba2)' : 
                                             '#e0e0e0'};
@@ -3866,8 +3866,8 @@
                             </div>
                         </div>
                         <canvas id="workspaceCanvas" class="workspace-canvas" 
-                                width="800" height="200"
-                                style="background: white; border-radius: 10px; cursor: crosshair; width: 100%; touch-action: none;">
+                                width="1000" height="400"
+                                style="background: white; border-radius: 10px; cursor: crosshair; width: 100%; height: 400px; touch-action: none;">
                         </canvas>
                         <div class="workspace-tools">
                             <button class="workspace-btn" onclick="setMode('draw')" id="drawMode" style="background: linear-gradient(45deg, #667eea, #764ba2);">✏️ Dibujar</button>
@@ -3877,6 +3877,7 @@
                             <button class="workspace-btn" onclick="insertText('×')">×</button>
                             <button class="workspace-btn" onclick="insertText('÷')">÷</button>
                             <button class="workspace-btn" onclick="insertText('=')">＝</button>
+                            <button class="workspace-btn" onclick="newLine()" style="background: linear-gradient(45deg, #3498db, #2980b9);">↵ Nueva línea</button>
                         </div>
                         <div class="workspace-tools" style="margin-top: 5px;">
                             <button class="workspace-btn" onclick="insertText('0')">0</button>
@@ -3889,6 +3890,7 @@
                             <button class="workspace-btn" onclick="insertText('7')">7</button>
                             <button class="workspace-btn" onclick="insertText('8')">8</button>
                             <button class="workspace-btn" onclick="insertText('9')">9</button>
+                            <button class="workspace-btn" onclick="insertText('  ')" style="background: linear-gradient(45deg, #95a5a6, #7f8c8d);">⎵ Espacio</button>
                         </div>
                     </div>
                 </div>
@@ -4086,16 +4088,16 @@
         function renderSimpleOperation(exercise) {
             return `
                 <div class="question-card">
-                    <h3 style="font-size: 2.5em; text-align: center;">${exercise.question}</h3>
+                    <h3 style="font-size: 2em; text-align: center;">${exercise.question}</h3>
                 </div>
                 <div class="interactive-question">
                     <div style="text-align: center;">
                         <input type="number" class="math-input" id="simpleAnswer" 
-                               style="width: 200px; font-size: 2em; text-align: center;"
+                               style="width: 150px; font-size: 1.5em; text-align: center;"
                                onkeypress="if(event.key === 'Enter') checkSimpleOperation(${exercise.answer})">
                         <br><br>
                         <button class="btn" onclick="checkSimpleOperation(${exercise.answer})" 
-                                style="font-size: 1.5em; padding: 15px 40px;">
+                                style="font-size: 1.2em; padding: 10px 30px;">
                             Verificar ✓
                         </button>
                     </div>
@@ -5664,7 +5666,7 @@
             ctx.lineWidth = 2;
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
-            ctx.font = '20px Comic Sans MS';
+            ctx.font = '24px Comic Sans MS';
             
             // Event listeners para dibujar
             canvas.addEventListener('mousedown', startDrawing);
@@ -5741,16 +5743,25 @@
             if (!canvas || !ctx) return;
             
             ctx.fillStyle = currentColor;
-            ctx.font = '20px Comic Sans MS';
+            ctx.font = '24px Comic Sans MS';
             ctx.fillText(text, textX, textY);
             
             // Mover posición para el siguiente texto
             textX += ctx.measureText(text).width + 5;
             
-            // Si llegamos al final de la línea, saltar a la siguiente
-            if (textX > canvas.width / 2 - 30) {
-                textX = 20;
-                textY += 30;
+            // Si llegamos al final de la línea, saltar a la siguiente automáticamente
+            if (textX > canvas.width / 2 - 50) {
+                newLine();
+            }
+        }
+        
+        function newLine() {
+            textX = 20;
+            textY += 35;
+            
+            // Si llegamos al final del canvas, volver arriba
+            if (textY > canvas.height / 2 - 20) {
+                textY = 30;
             }
         }
 
